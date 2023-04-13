@@ -1,6 +1,7 @@
 global using BlazorEcommerce.Server;
 global using Microsoft.EntityFrameworkCore;
 using BlazorEcommerce.Server.Data;
+using BlazorEcommerce.Server.Services.ProductService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IProductService, ProductService>();
 
 //Database Context
 builder.Services.AddDbContext<DataContext>(options =>
