@@ -11,6 +11,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddSwaggerGen();
 
+// Services
 builder.Services.AddScoped<IProductService, ProductService>();
 
 //Database Context
