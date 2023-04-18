@@ -1,5 +1,6 @@
 ﻿using BlazorEcommerce.Server.Data;
 using BlazorEcommerce.Shared;
+using BlazorEcommerce.Shared.Models;
 
 namespace BlazorEcommerce.Server.Services.ProductService
 {

@@ -1,6 +1,7 @@
 ﻿using BlazorEcommerce.Server.Data;
 using BlazorEcommerce.Server.Services.ProductService;
 using BlazorEcommerce.Shared;
+using BlazorEcommerce.Shared.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,14 @@ namespace BlazorEcommerce.Server.Controllers
         public async Task<ActionResult<ServiceResponse<Product>>> DeleteProduct(Product product)
         {
             var result = await ProductService.DeleteProduct(product);
+
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<ServiceResponse<Product>>> CreateProduct(Product product)
+        {
+            var result = await ProductService.AddProduct(product);
 
             return Ok(result);
         }

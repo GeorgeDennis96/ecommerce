@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorEcommerce.Shared
+namespace BlazorEcommerce.Shared.Models
 {
     public class Product
     {

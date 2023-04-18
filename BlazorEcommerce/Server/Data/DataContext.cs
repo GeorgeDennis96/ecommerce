@@ -1,4 +1,4 @@
-﻿using BlazorEcommerce.Shared;
+﻿using BlazorEcommerce.Shared.Models;
 
 namespace BlazorEcommerce.Server.Data
 {
@@ -10,6 +10,8 @@ namespace BlazorEcommerce.Server.Data
 
         public DbSet<Product> Products {get; set;}
 
+
+        
 
     }
 }
