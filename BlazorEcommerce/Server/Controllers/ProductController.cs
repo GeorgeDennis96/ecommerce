@@ -19,9 +19,17 @@ namespace BlazorEcommerce.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProduct()
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
         {
             var result = await ProductService.GetProductList();
+            return Ok(result);  
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProduct(int id)
+        {
+            var result = await ProductService.GetProduct(id);
             return Ok(result);
         }
 

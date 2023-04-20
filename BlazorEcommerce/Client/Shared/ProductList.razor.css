@@ -28,6 +28,14 @@
     color:green;
 }
 
+.product-card{
+    margin: 12px;
+}
+
+.product-card-body {
+    padding: 0px;
+}
+
 @media (max-width: 1023.98px)
 {
     .media{
@@ -40,5 +48,9 @@
     .media-img-wrapper {
         width: 100%;
         height: auto;
+    }
+
+    .product-card-body{
+        padding:12px;
     }
 }

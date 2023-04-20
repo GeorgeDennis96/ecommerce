@@ -12,19 +12,38 @@ namespace BlazorEcommerce.Server.Services.ProductService
             _context = context;
         }
 
-        public Task<ServiceResponse<Product>> AddProduct(Product product)
+        public async Task<ServiceResponse<Product>> AddProduct(Product product)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<Product>();
+
+            var result = await _context.Products.AddAsync(product);
+            if (result == null)
+            {
+                response.Success = false;
+                response.Message = "Could not add product.";
+            }
+            else
+            {
+                response.Data = result.Entity;
+            }
+            return response;
         }
 
-        public Task<ServiceResponse<Product>> DeleteProduct(Product product)
+        public async Task<ServiceResponse<Product>> GetProduct(int id)
         {
-            throw new NotImplementedException();
-        }
+            var response = new ServiceResponse<Product>();
+            var product = await _context.Products.FindAsync(id);
 
-        public Task<ServiceResponse<Product>> GetProduct(int id)
-        {
-            throw new NotImplementedException();
+            if (product == null)
+            {
+                response.Success = false;
+                response.Message = "This product does not exist.";
+            }
+            else
+            {
+                response.Data = product;
+            }
+            return response;
         }
 
         public async Task<ServiceResponse<List<Product>>> GetProductList()
@@ -33,6 +52,23 @@ namespace BlazorEcommerce.Server.Services.ProductService
             {
                 Data = await _context.Products.ToListAsync()
             };
+            return response;
+        }
+
+        public async Task<ServiceResponse<Product>> DeleteProduct(Product product)
+        {
+            var response = new ServiceResponse<Product>();
+
+            var result = await _context.Products.FindAsync(product.Id) == product;
+            if (result == false)
+            {
+                response.Success = false;
+                response.Message = "Product id not found.";
+            }
+            else
+            {
+                _context.Remove(product);
+            }
             return response;
         }
 
