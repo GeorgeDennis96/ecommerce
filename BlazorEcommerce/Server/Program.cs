@@ -1,6 +1,8 @@
 global using BlazorEcommerce.Server;
 global using Microsoft.EntityFrameworkCore;
 using BlazorEcommerce.Server.Data;
+using BlazorEcommerce.Server.Services.EmailService;
+using BlazorEcommerce.Server.Services.PaymentService;
 using BlazorEcommerce.Server.Services.ProductService;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 // Services
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 //Database Context
 builder.Services.AddDbContext<DataContext>(options =>

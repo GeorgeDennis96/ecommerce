@@ -1,6 +1,6 @@
 ﻿using BlazorEcommerce.Server.Data;
 using BlazorEcommerce.Shared;
-using BlazorEcommerce.Shared.Models;
+using BlazorEcommerce.Shared.Models.Product;
 
 namespace BlazorEcommerce.Server.Services.ProductService
 {
@@ -12,7 +12,7 @@ namespace BlazorEcommerce.Server.Services.ProductService
             _context = context;
         }
 
-        public async Task<ServiceResponse<Product>> AddProduct(Product product)
+        public async Task<ServiceResponse<Product>> CreateProduct(Product product)
         {
             var response = new ServiceResponse<Product>();
 
@@ -29,7 +29,7 @@ namespace BlazorEcommerce.Server.Services.ProductService
             return response;
         }
 
-        public async Task<ServiceResponse<Product>> GetProduct(int id)
+        public async Task<ServiceResponse<Product>> RetrieveProduct(int id)
         {
             var response = new ServiceResponse<Product>();
             var product = await _context.Products.FindAsync(id);
@@ -46,7 +46,7 @@ namespace BlazorEcommerce.Server.Services.ProductService
             return response;
         }
 
-        public async Task<ServiceResponse<List<Product>>> GetProductList()
+        public async Task<ServiceResponse<List<Product>>> ListProducts()
         {
             var response = new ServiceResponse<List<Product>>
             {
@@ -69,7 +69,7 @@ namespace BlazorEcommerce.Server.Services.ProductService
             {
                 _context.Remove(product);
             }
-            return response;
+            return response;    
         }
 
         public Task<ServiceResponse<Product>> UpdateProduct(Product product)

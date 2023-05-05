@@ -1,7 +1,7 @@
 ﻿using BlazorEcommerce.Server.Data;
 using BlazorEcommerce.Server.Services.ProductService;
 using BlazorEcommerce.Shared;
-using BlazorEcommerce.Shared.Models;
+using BlazorEcommerce.Shared.Models.Product;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,7 +21,7 @@ namespace BlazorEcommerce.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
         {
-            var result = await ProductService.GetProductList();
+            var result = await ProductService.ListProducts();
             return Ok(result);  
         }
 
@@ -29,7 +29,7 @@ namespace BlazorEcommerce.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProduct(int id)
         {
-            var result = await ProductService.GetProduct(id);
+            var result = await ProductService.RetrieveProduct(id);
             return Ok(result);
         }
 
@@ -44,7 +44,7 @@ namespace BlazorEcommerce.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<ServiceResponse<Product>>> CreateProduct(Product product)
         {
-            var result = await ProductService.AddProduct(product);
+            var result = await ProductService.CreateProduct(product);
 
             return Ok(result);
         }
