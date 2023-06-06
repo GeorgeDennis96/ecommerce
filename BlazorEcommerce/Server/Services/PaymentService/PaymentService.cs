@@ -36,11 +36,11 @@ namespace BlazorEcommerce.Server.Services.PaymentService
             {
                 var options = new PaymentIntentCreateOptions
                 {
-                    Amount = (long)(amount * 100), // convert to cents
+                    Amount = (long)(amount * 100),
                     Currency = currency,
                     PaymentMethod = paymentMethodId,
-                    Confirm = true, // confirm the payment intent immediately
-                    ErrorOnRequiresAction = true // error if authentication is required
+                    Confirm = true,
+                    ErrorOnRequiresAction = true
                 };
 
                 var intent = await new PaymentIntentService().CreateAsync(options);

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting.Server;
 using BlazorEcommerce.Shared.Models.Messaging;
 using System.Net.Mail;
+using BlazorEcommerce.Shared;
 
 namespace BlazorEcommerce.Server.Services.EmailService
 {
@@ -17,28 +18,34 @@ namespace BlazorEcommerce.Server.Services.EmailService
             SmtpServer.Port = 587;
         }
 
-        public bool SendEmail(Email email)
+        public ServiceResponse<bool> SendEmail(Email email)
         {
+            var response = new ServiceResponse<bool>() { Success = false };
             try
             {
-                MailMessage mail = new MailMessage();
+                if (email != null)
+                {
+                    MailMessage mail = new MailMessage()
+                    {
+                        From = new MailAddress(Username),
+                        Subject = email.Subject,
+                        IsBodyHtml = true,
+                        Body = $"<p>{email.Message}</p>"
+                    };
+                    mail.To.Add($"{email.To}");
 
-                mail.From = new MailAddress(Username);
-                mail.To.Add(email.To);
-                mail.Subject = email.Subject;
-                mail.IsBodyHtml = true;
-                mail.Body =
-                    $"<p>{email.Message}</p>";
+                    SmtpServer.Send(mail);
 
-                SmtpServer.Send(mail);
-
-                return true;
+                    response.Success = true;
+                    return response;
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error - " + ex.Message);
-                return false;
+                return response;
             }
+            return response;
         }
     }
 }

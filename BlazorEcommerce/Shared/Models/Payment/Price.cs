@@ -4,7 +4,7 @@ namespace BlazorEcommerce.Shared.Models.Payment
     public class Price
     {
         // The product this price is attached to
-        public string ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public string? Nickname { get; set; }
         public string? CurrencyType { get; set; }
         public long Amount { get; set; }
