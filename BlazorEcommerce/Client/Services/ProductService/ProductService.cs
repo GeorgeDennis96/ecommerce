@@ -13,14 +13,26 @@ namespace BlazorEcommerce.Client.Services.ProductService
 
         public List<Product> Products { get; set; }
 
-        public async Task GetProducts()
+        public Task AdminCreateProduct(CreateProductRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AdminDeleteProduct(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<bool> AdminGetProducts()
         {
             var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product");
             if (result != null && result.Data != null)
             {
                 Products = result.Data;
+                return true;
             }
-
+            return false;
         }
+
     }
 }

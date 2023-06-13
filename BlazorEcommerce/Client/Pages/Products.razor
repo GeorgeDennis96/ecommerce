@@ -1,11 +1,54 @@
 ﻿@page "/products"
 
-<ProductList />
+@inject HttpClient Http
+@inject IProductService ProductService
+
+@if (ProductService.Products == null || ProductService.Products.Count == 0)
+{
+    <span>Loading Products...</span>
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    </div>
+}
+else
+{
+    <ul class="list-unstyled">
+        @foreach (var product in ProductService.Products)
+        {
+            <div class="card product-card">
+                <div class="card-body product-card-body">
+                    <li class="media my-2">
+                        <div class="media-img-wrapper mr-2">
+                            <a href="/product/@product.Id">
+                                <img class="media-img" src="@product.ImageUrl" alt="@product.Title">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="/product/@product.Id">
+                                <h4 class="mb-0">@product.Title</h4>
+                            </a>
+                            <p style="margin-top: 1rem;">
+                                @product.Description
+                            </p>
+                            <h5 class="price">
+                                £@product.Price
+                            </h5>
+                        </div>
+                    </li>
+                </div>
+            </div>
+        }
+    </ul>
+}
 
 @code {
 
-    protected override async Task OnParametersSetAsync()
-    {
+    private bool response;
 
+    protected override async Task OnInitializedAsync()
+    {
+        response = await ProductService.AdminGetProducts();
+
+        Console.WriteLine("THE RESPONSE: "+response.ToString());
     }
 }
