@@ -1,6 +1,6 @@
 ﻿using BlazorEcommerce.Server.Data;
 using BlazorEcommerce.Shared;
-using BlazorEcommerce.Shared.Models.Product;
+using BlazorEcommerce.Shared.Models.Product.Admin;
 
 namespace BlazorEcommerce.Server.Services.ProductService
 {
@@ -12,9 +12,9 @@ namespace BlazorEcommerce.Server.Services.ProductService
             _context = context;
         }
 
-        public async Task<ServiceResponse<Product>> CreateProduct(Product product)
+        public async Task<ServiceResponse<AdminProduct>> CreateProduct(AdminProduct product)
         {
-            var response = new ServiceResponse<Product>();
+            var response = new ServiceResponse<AdminProduct>();
 
             var result = await _context.Products.AddAsync(product);
             if (result == null)
@@ -29,9 +29,9 @@ namespace BlazorEcommerce.Server.Services.ProductService
             return response;
         }
 
-        public async Task<ServiceResponse<Product>> RetrieveProduct(int id)
+        public async Task<ServiceResponse<AdminProduct>> RetrieveProduct(int id)
         {
-            var response = new ServiceResponse<Product>();
+            var response = new ServiceResponse<AdminProduct>();
             var product = await _context.Products.FindAsync(id);
 
             if (product == null)
@@ -46,18 +46,18 @@ namespace BlazorEcommerce.Server.Services.ProductService
             return response;
         }
 
-        public async Task<ServiceResponse<List<Product>>> ListProducts()
+        public async Task<ServiceResponse<List<AdminProduct>>> ListProducts()
         {
-            var response = new ServiceResponse<List<Product>>
+            var response = new ServiceResponse<List<AdminProduct>>
             {
                 Data = await _context.Products.ToListAsync()
             };
             return response;
         }
 
-        public async Task<ServiceResponse<Product>> DeleteProduct(Product product)
+        public async Task<ServiceResponse<AdminProduct>> DeleteProduct(AdminProduct product)
         {
-            var response = new ServiceResponse<Product>();
+            var response = new ServiceResponse<AdminProduct>();
 
             var result = await _context.Products.FindAsync(product.Id) == product;
             if (result == false)
@@ -72,7 +72,7 @@ namespace BlazorEcommerce.Server.Services.ProductService
             return response;    
         }
 
-        public Task<ServiceResponse<Product>> UpdateProduct(Product product)
+        public Task<ServiceResponse<AdminProduct>> UpdateProduct(AdminProduct product)
         {
             throw new NotImplementedException();
         }

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BlazorEcommerce.Shared.Models.Product
+namespace BlazorEcommerce.Shared.Models.Product.Admin
 {
-    public class Product
+    public class AdminProduct
     {
         public int Id { get; set; }
         public string Title { get; set; } = string.Empty;

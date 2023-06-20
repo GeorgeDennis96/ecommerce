@@ -25,6 +25,7 @@
     background-color: transparent;
     border-color: white;
     border-radius: 30px;
+    position: static;
 }
 
 .media-img-wrapper{
@@ -36,7 +37,15 @@
     color:green;
 }
 
-@media (max-width: 1023.98px){
+.product-load-notification {
+    text-align: center;
+}
+
+.row {
+    justify-content: center;
+}
+
+@media (max-width: 1023.98px) {
     .media {
         flex-direction: column;
     }

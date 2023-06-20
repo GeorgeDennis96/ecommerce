@@ -5,9 +5,14 @@
 
 @if (ProductService.Products == null || ProductService.Products.Count == 0)
 {
-    <span>Loading Products...</span>
-    <div class="progress">
-        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+    <div class="col-12 container product-load-notification">
+        <div class="row-12"></div>
+        <div class="spinner-border text-light" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        <div class="row-12">
+            <span>Loading Products...</span>
+        </div>
     </div>
 }
 else
@@ -47,7 +52,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        response = await ProductService.AdminGetProducts();
+        response = await ProductService.GetProducts();
 
         Console.WriteLine("THE RESPONSE: "+response.ToString());
     }

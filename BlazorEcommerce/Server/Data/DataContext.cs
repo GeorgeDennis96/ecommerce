@@ -1,4 +1,5 @@
 ﻿using BlazorEcommerce.Shared.Models.Product;
+using BlazorEcommerce.Shared.Models.Product.Admin;
 
 namespace BlazorEcommerce.Server.Data
 {
@@ -8,10 +9,10 @@ namespace BlazorEcommerce.Server.Data
         {
         }
 
-        public DbSet<Product> Products {get; set;}
+        public DbSet<AdminProduct> AdminProducts {get; set;}
 
+        public DbSet<Product> Products { get; set; }
 
-        
 
     }
 }

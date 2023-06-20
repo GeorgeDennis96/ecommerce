@@ -1,4 +1,4 @@
-﻿using BlazorEcommerce.Shared.Models.Product;
+﻿using BlazorEcommerce.Shared.Models.Product.Admin;
 
 namespace BlazorEcommerce.Client.Services.ProductService
 {
@@ -11,9 +11,11 @@ namespace BlazorEcommerce.Client.Services.ProductService
             _httpClient = http;
         }
 
+        public List<AdminProduct> AdminProducts { get; set; }
+
         public List<Product> Products { get; set; }
 
-        public Task AdminCreateProduct(CreateProductRequest request)
+        public Task AdminCreateProduct(AdminCreateProductRequest request)
         {
             throw new NotImplementedException();
         }
@@ -23,12 +25,42 @@ namespace BlazorEcommerce.Client.Services.ProductService
             throw new NotImplementedException();
         }
 
+        public Task<Guid> AdminGetProductById(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> AdminGetProducts()
+        {
+            var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<AdminProduct>>>("api/product");
+            if (result != null && result.Data != null)
+            {
+                AdminProducts = result.Data;
+                return true;
+            }
+            return false;
+        }
+
+        public async Task<bool> GetProducts()
         {
             var result = await _httpClient.GetFromJsonAsync<ServiceResponse<List<Product>>>("api/product");
             if (result != null && result.Data != null)
             {
-                Products = result.Data;
+                var prods = new List<Product>();
+
+                foreach (var item in result.Data)
+                {
+                    prods.Add(new Product()
+                    {
+                        Id = item.Id,
+                        Title = item.Title,
+                        Description = item.Description,
+                        ImageUrl = item.ImageUrl,
+                        Price = item.Price,
+                    });
+                }
+
+                Products = prods;
                 return true;
             }
             return false;
